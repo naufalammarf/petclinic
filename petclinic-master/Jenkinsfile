@@ -1,11 +1,11 @@
 def appName = 'petclinic-user102'
 def gitUrl = 'https://gitlab.com/Naufalamm/petclinic-user102.git'
-def branch = 'master'
+def branch = 'main'
 def imageRegistry= 'demowil.jfrog.io/docker-dev'
 def namespace = 'petclinic'
 
 
-node ('master'){
+node ('main'){
 	stage ("Prepare") {
 		cleanWs deleteDirs: true
 		checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[credentialsId: 'gitlab-user102', url: "${gitUrl}"]], branches: [[name: "${branch}"]]]
