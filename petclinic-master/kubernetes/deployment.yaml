@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '<<APPNAME>>'
+  labels:
+    name: '<<APPNAME>>'
+  namespace: petclinic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: <<APPNAME>>
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: '<<APPNAME>>'
+    spec:
+      containers:
+        - name: '<<APPNAME>>'
+          image: '<<IMAGETAG>>'
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          env:
+            - name: TZ
+              value: Asia/Jakarta
+          resources:
+            requests:
+              cpu: '0.2'
+              memory: '256Mi'
+      imagePullSecrets:
+      - name: regcred
